@@ -10,8 +10,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      builder: (context)=>Products(),
+    return ChangeNotifierProvider.value(
+      value: Products(),
+      //builder: (context)=>Products(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'My Shop',
