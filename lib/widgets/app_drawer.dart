@@ -21,7 +21,6 @@ class AppDrawer extends StatelessWidget {
             Navigator.of(context).pushReplacementNamed('/');
             },
           ),
-
           ListTile(
             title: Text('Orders'),
             leading: Icon(Icons.payment),
