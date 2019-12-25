@@ -12,6 +12,8 @@ class UserProductItem extends StatelessWidget {
   UserProductItem({this.id,this.title,this.imageUrl});
   @override
   Widget build(BuildContext context) {
+    final scaffold = Scaffold.of(context);
+
     return ListTile(
       title: Text(title),
       leading: CircleAvatar(
@@ -25,24 +27,28 @@ class UserProductItem extends StatelessWidget {
               Navigator.of(context).pushNamed(EditProductScreen.routName,arguments: id);
             },
               color: Theme.of(context).primaryColor,),
-            IconButton(icon: Icon(Icons.delete), onPressed:(){
-              showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog(
-                    title: Text('Are you sure?'),
-                    content:
-                    Text('Do you want to remove this product?'),
-                    actions: <Widget>[
-                      FlatButton(onPressed: (){
-                        Navigator.of(context).pop();
-                      }, child: Text('No')),
-                      FlatButton(onPressed: (){
-                        Provider.of<Products>(context,listen: false).deleteProduct(id);
-                        Navigator.of(context).pop();
-                      }, child: Text('Yes')),
-                    ],
-                  ));
-
+            IconButton(icon: Icon(Icons.delete), onPressed:()async{
+//              showDialog(
+//                  context: context,
+//                  builder: (context) => AlertDialog(
+//                    title: Text('Are you sure?'),
+//                    content:
+//                    Text('Do you want to remove this product?'),
+//                    actions: <Widget>[
+//                      FlatButton(onPressed: (){
+//                        Navigator.of(context).pop();
+//                      }, child: Text('No')),
+//                      FlatButton(onPressed: (){
+//                        Provider.of<Products>(context,listen: false).deleteProduct(id);
+//                        Navigator.of(context).pop();
+//                      }, child: Text('Yes')),
+//                    ],
+//                  ));
+            try{
+              await Provider.of<Products>(context,listen: false).deleteProduct(id);
+            }catch(error){
+              scaffold.showSnackBar(SnackBar(content: Text('Deleting failed!',textAlign: TextAlign.center,)),);
+            }
             },
               color: Theme.of(context).errorColor,),
           ],

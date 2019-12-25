@@ -23,12 +23,12 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites = false;
   var _isInit = true;
   var _isLoading = false;
-
-  @override
-  void initState() {
-  // Future.delayed(Duration.zero).then((_){Provider.of<Products>(context).fetchAndSetProducts();});
-    super.initState();
-  }
+//
+//  @override
+//  void initState() {
+//  // Future.delayed(Duration.zero).then((_){Provider.of<Products>(context).fetchAndSetProducts();});
+//    super.initState();
+//  }
 
   @override
   void didChangeDependencies() {
@@ -90,7 +90,10 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         ],
       ),
       drawer: AppDrawer(),
-      body: _isLoading ? Center(child: CircularProgressIndicator(),) : ProductsGrid(_showOnlyFavorites),
+      body:
+
+      _isLoading ? Center(child: CircularProgressIndicator(backgroundColor: Colors.purpleAccent,),) :
+      ProductsGrid(_showOnlyFavorites),
     );
   }
 }
