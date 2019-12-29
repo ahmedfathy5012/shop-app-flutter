@@ -50,6 +50,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    Future<void> _refreshProducts(BuildContext context)async{
+      await Provider.of<Products>(context).fetchAndSetProducts();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('MyShop'),
@@ -90,10 +95,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         ],
       ),
       drawer: AppDrawer(),
-      body:
+      body:RefreshIndicator(
+          child: _isLoading ? Center(child: CircularProgressIndicator(),) : ProductsGrid(_showOnlyFavorites),
+          onRefresh:()=> _refreshProducts(context))
 
-      _isLoading ? Center(child: CircularProgressIndicator(backgroundColor: Colors.purpleAccent,),) :
-      ProductsGrid(_showOnlyFavorites),
+     // _isLoading ? Center(child: CircularProgressIndicator(),) : ProductsGrid(_showOnlyFavorites),
     );
   }
 }
