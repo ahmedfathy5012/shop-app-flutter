@@ -10,6 +10,8 @@ import './providers/orders.dart';
 import './screens/orders_screen.dart';
 import './screens/user_product_screen.dart';
 import './screens/edit_product_screen.dart';
+import './screens/auth_screen.dart';
+import './providers/auth.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,6 +20,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
+      ChangeNotifierProvider.value(
+          value: Auth()),
+
       ChangeNotifierProvider.value(
           value: Products()),
 
@@ -36,13 +41,14 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.deepOrange,
           fontFamily: 'Lato' ,
         ),
-        home: ProductsOverviewScreen(),
+        home: AuthScreen(),
         routes: {
             ProductDetailScreen.routeName: (context)=> ProductDetailScreen(),
             CartScreen.routName: (context)=> CartScreen(),
             OrdersScreen.routeName : (context)=> OrdersScreen(),
             UserProductScreen.routeName: (context)=> UserProductScreen(),
             EditProductScreen.routName : (context)=> EditProductScreen(),
+            AuthScreen.routeName : (context)=> AuthScreen(),
         },
       ),
     );
