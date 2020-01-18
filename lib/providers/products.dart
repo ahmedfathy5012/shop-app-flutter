@@ -97,7 +97,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    const url = 'https://provider-test-4b458.firebaseio.com/products.json';
+    final url = 'https://provider-test-4b458.firebaseio.com/products.json?auth=$authToken';
 
     final response = await http.post(
       url,
@@ -148,7 +148,7 @@ class Products with ChangeNotifier {
   Future<void> updateProduct(String id, Product newProduct) async{
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
-      String url = 'https://provider-test-4b458.firebaseio.com/products/$id.json';
+      final url = 'https://provider-test-4b458.firebaseio.com/products/$id.json?auth=$authToken';
      await http.patch(
           url,
           body: json.encode({
